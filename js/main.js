@@ -309,7 +309,9 @@ class LessonMode {
     $('phrase').textContent     = e.phrase;
     $('lessonIcon').textContent = e.icon;
     $('lessonIcon').hidden      = false;
-    this._voice.speak(e.phrase);            // la voz lee la frase mientras corre el video
+    // La voz dice primero la emoción y luego la frase: "Feliz... Me siento feliz cuando..."
+    const name = e.label.charAt(0) + e.label.slice(1).toLowerCase();
+    this._voice.speak(`${name}... ${e.phrase}`);
     await this._scene.playClip(e.clip, () => token !== this._state.epoch);
   }
 
